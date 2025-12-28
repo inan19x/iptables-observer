@@ -7,13 +7,13 @@
 # Variables
 INTERNAL_NET="172.16.1.0/24"
 CHAIN_NAME="IPTABLES_OBSERVER_LOG"
-LOG_PREFIX="IPTABLES-OBSERVER "
+LOG_PREFIX="myIPTABLES "
 LOG_LIMIT="10/min"
 LOG_BURST="20"
 
 # Check if script is run as root
 if [[ $EUID -ne 0 ]]; then
-   echo "This script must be run as root" 
+   echo "This script must be run as root"
    exit 1
 fi
 
@@ -37,10 +37,12 @@ iptables -A $CHAIN_NAME -j RETURN
 # ========================
 # 2. Exclude HTTP/HTTPS
 # ========================
-# TCP 80, 443
-iptables -A FORWARD -p tcp -m multiport --dports 80,443 -j RETURN
-# UDP 443 (QUIC)
-iptables -A FORWARD -p udp --dport 443 -j RETURN
+# TCP
+iptables -A FORWARD -p tcp -m multiport --dports 53,80,123,443 -j RETURN
+iptables -A FORWARD -p tcp -m multiport --sports 53,80,123,443 -j RETURN
+# UDP
+iptables -A FORWARD -p udp -m multiport --dports 53,80,123,443 -j RETURN
+iptables -A FORWARD -p udp -m multiport --sports 53,80,123,443 -j RETURN
 
 # ========================
 # 3. Apply logging to FORWARD chain
