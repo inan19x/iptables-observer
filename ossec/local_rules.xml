@@ -1,11 +1,10 @@
 <!-- snip -->
 
 <group name="iptables-observer,">
-    <rule id="100001" level="7">
-        <decoded_as>syslog</decoded_as>
-        <field name="program_name">IPTABLES-OBSERVER</field>
-        <description>Non-HTTP/HTTPS traffic detected by iptables-observer</description>
-    </rule>
+  <rule id="100001" level="11">
+    <program_name>IPTABLES-OBSERVER</program_name>
+    <description>Uncommon inbound/outbound traffic detected by iptables-observer</description>
+  </rule>
 </group>
 
 <!-- snip -->
