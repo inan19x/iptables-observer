@@ -1,0 +1,13 @@
+<!-- snip -->
+
+<decoder name="iptables">
+  <program_name>^IPTABLES-OBSERVER</program_name>
+</decoder>
+
+<decoder name="iptables">
+  <parent>iptables</parent>
+  <regex>IPTABLES-OBSERVER\s+IN=(\S+)\s+OUT=(\S+)\s+MAC=\S+\s+SRC=(\S+)\s+DST=(\S+)\s+LEN=\S+\s+TOS=\S+\s+PREC=\S+\s+TTL=\d+\s+ID=\d+\s+PROTO=(\S+)\s+TYPE=\d+\s+CODE=\d+\s+ID=\d+\s+SEQ=\d+</regex>
+  <order>in_interface, out_interface, srcip, dstip, protocol</order>
+</decoder>
+
+<!-- snip -->
