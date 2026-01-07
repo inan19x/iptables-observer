@@ -1,10 +1,19 @@
 <!-- snip -->
 
 <group name="iptables-observer,">
-  <rule id="100001" level="11">
+  <rule id="100001" level="12">
     <program_name>IPTABLES-OBSERVER</program_name>
     <description>Uncommon inbound/outbound traffic detected by iptables-observer</description>
   </rule>
+</group>
+
+<group name="ids,suricata,">
+    <rule id="86601" level="15" overwrite="yes">
+        <if_sid>86600</if_sid>
+        <field name="event_type">^alert$</field>
+        <description>Suricata: Alert - $(alert.signature)</description>
+        <options>no_full_log</options>
+    </rule>
 </group>
 
 <!-- snip -->
